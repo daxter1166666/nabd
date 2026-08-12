@@ -1,29 +1,44 @@
-name: hope_pulse
-description: "نبض الأمل - تطبيق التبرعات والرسائل الصوتية الإنسانية المكتوب بـ Flutter"
-publish_to: 'none'
-version: 1.0.0+1
+name: Build Flutter APK
 
-environment:
-  sdk: '>=3.0.0 <4.0.0'
+on:
+  push:
+    branches: [ main ]
 
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  google_fonts: ^6.1.0
-  record: ^7.1.1
-  audioplayers: ^5.2.1
-  lucide_icons: ^0.257.0
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^3.0.0
+    steps:
+    - uses: actions/checkout@v4
 
-flutter:
-  uses-material-design: true
-  
-dependency_overrides:
-  record: ^5.2.1
-  record_platform_interface: 1.6.0
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.x'
+        channel: 'stable'
+
+    - name: Install dependencies
+      run: flutter pub get
+      working-directory: flutter_app
+
+    - name: Build APK with retry
+      uses: nick-invision/retry@v3
+      with:
+        timeout_minutes: 20
+        max_attempts: 3
+        retry_wait_seconds: 30
+        command: cd flutter_app && flutter build apk --release --android-skip-build-dependency-validation
+      env:
+        GRADLE_OPTS: '-Dorg.gradle.parallel=true -Dorg.gradle.workers.max=4 -Dorg.gradle.daemon=false'
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-apk
+        path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
