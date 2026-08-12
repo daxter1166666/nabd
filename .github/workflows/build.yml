@@ -25,12 +25,14 @@ jobs:
 
     - name: Install dependencies
       run: flutter pub get
+      working-directory: flutter_app
 
     - name: Build APK
       run: flutter build apk --release
+      working-directory: flutter_app
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: release-apk
-        path: build/app/outputs/flutter-apk/app-release.apk
+        path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
