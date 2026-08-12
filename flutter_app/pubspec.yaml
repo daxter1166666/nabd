@@ -12,7 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   google_fonts: ^6.1.0
-  record: ^5.2.1
+  record: ^7.1.1
   audioplayers: ^5.2.1
   lucide_icons: ^0.257.0
 
