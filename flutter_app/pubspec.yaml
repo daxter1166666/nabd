@@ -33,7 +33,7 @@ jobs:
         timeout_minutes: 20
         max_attempts: 3
         retry_wait_seconds: 30
-        command: cd flutter_app && flutter build apk --release --android-skip-build-dependency-validation
+       command: cd flutter_app && flutter build apk --release --android-skip-build-dependency-validation
       env:
         GRADLE_OPTS: '-Dorg.gradle.parallel=true -Dorg.gradle.workers.max=4 -Dorg.gradle.daemon=false'
 
