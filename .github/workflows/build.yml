@@ -27,9 +27,15 @@ jobs:
       run: flutter pub get
       working-directory: flutter_app
 
-    - name: Build APK
-      run: flutter build apk --release
-      working-directory: flutter_app
+    - name: Build APK with retry
+      uses: nick-invision/retry@v3
+      with:
+        timeout_minutes: 20
+        max_attempts: 3
+        retry_wait_seconds: 30
+        command: cd flutter_app && flutter build apk --release
+      env:
+        GRADLE_OPTS: '-Dorg.gradle.parallel=true -Dorg.gradle.workers.max=4 -Dorg.gradle.daemon=false'
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
