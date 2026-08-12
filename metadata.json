@@ -1,0 +1,6 @@
+{
+  "name": "نبض الأمل - رسائل دعم صوتية",
+  "description": "منصة لتبرع بالرسائل الصوتية والكلمات الملهمة لمساندة مرضى السرطان، كبار السن، ودور الرعاية.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

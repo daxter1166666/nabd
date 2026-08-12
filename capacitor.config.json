@@ -1,0 +1,8 @@
+{
+  "appId": "com.hopepulse.app",
+  "appName": "نبض الأمل",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

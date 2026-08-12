@@ -1,0 +1,22 @@
+{
+  "short_name": "نبض الأمل",
+  "name": "نبض الأمل - منصة الرسائل الصوتية الإنسانية",
+  "icons": [
+    {
+      "src": "/app-icon.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/app-icon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0c0a09",
+  "theme_color": "#881337",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "منصة لتبرع بالرسائل الصوتية والكلمات الملهمة لمساندة المرضى وكبار السن ودور الرعاية"
+}
